@@ -1,0 +1,19 @@
+{
+  "name": "tz_setup",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pandapandakopanda/tz_setup.git"
+  },
+  "author": "Julia Balashova <ska-keda@yandex.ru>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/pandapandakopanda/tz_setup/issues"
+  },
+  "homepage": "https://github.com/pandapandakopanda/tz_setup#readme"
+}
