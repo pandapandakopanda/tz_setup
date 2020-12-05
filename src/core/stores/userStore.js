@@ -1,4 +1,5 @@
 import {observable, action, computed} from 'mobx'
+import UserList from '../../components/UserList'
 
 class UserStore{
   
@@ -8,41 +9,82 @@ class UserStore{
     @observable email = null
     @observable phone = null
     @observable status = false
-    @observable regdate = null
     @observable changedate = null
+    @observable active = null
+    @observable error = ''
 
-    @computed get newUser() {
-        const {
-            name, surname, lastname, email, phone, status, regdate, changedate
-        } = this
-        return {
-            name, surname, lastname, email, phone, status, regdate, changedate
-        }
-    }
 
     @action setName = (name) => {
         this.name = name
     }
 
     @action setSurname = (surname) => {
-        this.name = name
+        this.surname = surname
     }
 
     @action setLastname = (lastname) => {
-        this.name = name
+        this.lastname = lastname
     }
 
     @action setEmail = (email) => {
-        this.name = name
+        this.email = email
     }
 
     @action setPhone = (phone) => {
-        this.name = name
+        this.phone = phone
     }
 
     @action createUser = () => {
-        const user = this.newUser
-        console.log('user: ', user);
+        const {name, surname, lastname, email, phone } = this
+        const regdate = new Date
+        const status = this.status ? 'online' : 'offline'
+        const user = {
+            name, surname, lastname, email, phone, status, regdate
+        }
+        console.log('checkFill(user): ', this.checkFill(user));
+        if(!this.checkFill(user)) {
+            this.addUser(user)
+        } else return
+    }
+
+    @action addUser = (user) => {
+        const usersList = this.getUsersList()
+        const { phone } = user
+        usersList[`${phone}`] = user
+        localStorage.setItem('users', JSON.stringify(usersList))
+
+    }
+
+    getUsersList = () => {
+        const userslist = JSON.parse(localStorage.getItem('users'))
+        return userslist
+    }
+
+    initStorage = () => {
+        const users = this.getUsersList()
+        if(users === null) {
+            const users = new Object
+            localStorage.setItem('users', JSON.stringify(users))
+        }
+        else return
+    }
+
+    @action setActiveUser = (phone) => {
+        this.active = phone
+        console.log('this.active: ', this.active);
+    }
+
+    checkFill = (obj) => {
+        const errors = Object.keys(obj).filter(el =>  obj[`${el}`] === null || obj[`${el}`] === '')
+        return errors.length
+    }
+
+    checkEmail = (email) => {
+
+    }
+
+    checkPhone = (phone) => {
+
     }
 
 }
