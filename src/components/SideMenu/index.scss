@@ -1,0 +1,14 @@
+.sideMenu{
+    height: 100vh;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    border-right: 2px solid black;
+}
+
+.sideMenu_battonblock {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding-right: 2px;
+}

@@ -4,6 +4,7 @@ import App from './components/App'
 import { HashRouter as Router } from 'react-router-dom'
 import { Provider } from 'mobx-react'
 import store from './core/store'
+import ST from './index.scss'
 
 const container = document.createElement('div')
 container.id = 'root'

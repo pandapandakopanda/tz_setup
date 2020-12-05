@@ -1,0 +1,24 @@
+.input {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin: 10px 30px 5px 0;
+  }
+  
+  .input_title{
+    display: flex;
+    user-select: none;
+    margin: 0;
+  }
+  
+  .input_header {
+    display: flex;
+    justify-self: flex-end;
+    height: 20px;
+    width: 200px;
+    background-color: white;
+    padding-left: 15px;
+    outline: none;
+    border: 1px solid black;
+    box-sizing: border-box
+  }
