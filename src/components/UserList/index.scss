@@ -5,17 +5,13 @@
     font-size: 15px;
 }
 
-p{
-    margin: 0;
-}
-
 .user {
     display: flex;
     padding-right: 20px;
     padding-left: 10px;
-    height: 30px;
+    min-height: 40px;
+    font-size: 10px;
     align-items: center;
-    border-right: 1px solid black;
     background: white;
     cursor: pointer;
     transition: background .5s;
@@ -23,4 +19,16 @@ p{
         background: black;
         color: white;
     }
+}
+
+.userName {
+    width: 150px;
+}
+
+.email {
+    width: 400px;
+}
+
+.phone {
+    width: 100px;
 }

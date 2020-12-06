@@ -3,7 +3,6 @@ import ST from './index.scss'
 import SideMenu from './SideMenu'
 import UserList from '../components/UserList'
 import CreateUser from './CreateUser'
-import UserData from './UserData'
 import {Switch, Route} from 'react-router-dom'
 import { inject } from 'mobx-react'
 
@@ -24,7 +23,6 @@ class App extends React.Component {
                     <Route exact path='/userlist' children={<UserList />}/> 
                     <Route exact path='/newuser' children={<CreateUser />}/> 
                 </Switch>
-                <UserData />
             </div>
         )
     }

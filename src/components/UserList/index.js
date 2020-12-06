@@ -1,5 +1,6 @@
 import React from 'react'
 import ST from './index.scss'
+import {calcClass} from '../../core/help'
 import { inject, observer } from 'mobx-react'
 
 @inject('store')
@@ -9,13 +10,16 @@ class UserList extends React.Component {
     createList = (users) => {
         if(users === null) return null
         const list = Object.keys(users).map(el => {
-            const {name, lastname, surname, phone} =  users[`${el}`]
+            const {name, lastname, surname, phone, email, status} =  users[`${el}`]
             const onClickHandle = () => {
-                    this.props.store.userStore.setActiveUser(phone)
+    
                 }
             return (
                 <div className={ST.user} key={phone} onClick={onClickHandle}>
-                    <p className={ST.userName}>{`${surname} ${name} ${lastname}`}</p>
+                    <div className={ST.userName}>{`${surname} ${name} ${lastname}`}</div>
+                    <div className={ST.email}>{email}</div>
+                    <div className={ST.phone}>{phone}</div>
+                    <div className={ST.status}>{status}</div>
                 </div>
             )
         })
