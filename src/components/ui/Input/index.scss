@@ -8,12 +8,14 @@
   
   .input_title{
     display: flex;
+    max-width: 100px;
     user-select: none;
     margin: 0;
   }
   
   .input_header {
     display: flex;
+    flex: 1;
     justify-self: flex-end;
     height: 20px;
     width: 200px;

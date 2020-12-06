@@ -10,6 +10,7 @@ class UserStore{
     @observable phone = null
     @observable status = null
     @observable changedate = null
+    @observable searchData = null
     @observable error = ''
     @observable roles = [
         {id:'cl', name:'client'},
@@ -41,7 +42,11 @@ class UserStore{
         this.status = status
     }
 
-    
+    @action setSearch = (data) => {
+        this.searchData = data
+        console.log(' this.searchData: ',  this.searchData);
+    }
+
     getStatus = () => {
         const status = this.roles.find(el => el.id === this.status)
         return (status === undefined) ? '' : status.name

@@ -1,11 +1,13 @@
 import React from 'react'
 import ST from './index.scss'
+import Input from '../ui/Input'
 import {calcClass} from '../../core/help'
 import { inject, observer } from 'mobx-react'
 
 @inject('store')
 @observer
 class UserList extends React.Component {
+
     
     createList = (users) => {
         if(users === null) return null
@@ -33,6 +35,9 @@ class UserList extends React.Component {
 
         return(
             <div className={ST.users}>
+                <div className={ST.search}>
+                    <Input title={''} placeholder={'Search'} onChangeHandler={this.props.store.userStore.setSearch}/>
+                </div>
                 {this.createList(users)}
             </div>
         )
