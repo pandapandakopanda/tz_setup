@@ -2,7 +2,7 @@
     display: flex;
     flex-direction: column;
     padding-left: 20px;
-    font-size: 15px;
+    font-size: 10px;
 }
 
 .user {
@@ -26,13 +26,30 @@
 }
 
 .email {
-    width: 400px;
+    width: 250px;
 }
 
 .phone {
     width: 100px;
 }
 
+.regdate {
+    width: 100px;
+}
+
+.filter {
+    display: flex;
+    justify-content: space-between;
+    p{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 0;
+    }
+}
+
 .search {
-    width: 400px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
 }

@@ -1,14 +1,18 @@
-.input {
+.input{
     display: flex;
     justify-content: space-between;
     width: 100%;
     margin: 10px 30px 5px 0;
     border-bottom: 1px solid black;
+     p {
+       display: flex;
+       align-items: center;
+     }
   }
   
   .input_title{
     display: flex;
-    max-width: 100px;
+    min-width: 100px;
     user-select: none;
     margin: 0;
   }
@@ -25,4 +29,8 @@
     outline: none;
     border: 1px solid transparent;
     box-sizing: border-box
+  }
+
+  .input_search {
+    justify-content: flex-start;
   }

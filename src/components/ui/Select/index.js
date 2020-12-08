@@ -23,7 +23,7 @@ class Select extends React.Component {
 
 
   render(){
-    const { title, selected, items, placeholder } = this.props
+    const { selected, items, placeholder } = this.props
     const selectedItem = findElementbyId(selected, items)
     console.log('selectedItem: ', selectedItem);
     const name = selectedItem ? selectedItem.name : placeholder
@@ -43,7 +43,6 @@ class Select extends React.Component {
 
     return(
       <div className={ST.select}>
-        <p className={ST.select_title}>{title}</p>
         <div className={ST.select_wrapper}>
             <div className={headerClass} onClick={ this.toggle }>
                 { name }
