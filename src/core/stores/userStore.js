@@ -20,7 +20,8 @@ class UserStore{
     @observable searchingUser = null
     @observable isSearching = false
     @observable filteredUsers = null
-    @observable isFiltering = true
+    @observable isFiltering = false
+    @observable isEditing = false
 
     @action setName = (name) => {
         this.name = name
@@ -48,10 +49,15 @@ class UserStore{
 
     @action setFilterStatus = (status) => {
         this.filterStatus = status
+        console.log('this.filterStatus: ', this.filterStatus);
     }
 
     @action setSearch = (data) => {
         this.searchData = data
+    }
+
+    @action setCurrentUser = (phone) => {
+        this.findByPhone(phone)
     }
 
     getStatus = () => {
@@ -63,17 +69,28 @@ class UserStore{
         const status = this.roles.filter(el => el.id === id )[0].name
         const users = this.getUsersList()
         const filteredUsers = Object.keys(users).filter(el => users[`${el}`][`status`] === status) 
-        this.filteredUsers = filteredUsers
+        this.filteredUsers = filteredUsers.map(el => users[`${el}`])
     }
 
     @action createUser = () => {
-        const {name, surname, lastname, email, phone } = this
-
+        const {name, surname, lastname, email } = this
+        const phone = (this.phone === null) ? null : `+7${this.phone.substring(1)}`
+        console.log('phone: ', phone);
         const date = new Date
         const regdate = new Intl.DateTimeFormat().format(date)
         const status = this.getStatus()
         if(!this.emailValidate(email)) {
             this.error = 'Пожалуйста, введите корректный e-mail'
+            return
+        } else if (this.isEmailExist(email)) {
+            this.error = 'Такой e-mail уже используется'
+            return
+        }
+        if(!this.phoneValidate(phone)) {
+            this.error = 'Пожалуйста, введите корректный номер телефона'
+            return
+        } else if (this.isPhoneExist(phone)) {
+            this.error = 'Такой номер телефона уже используется'
             return
         }
         const user = {
@@ -88,12 +105,22 @@ class UserStore{
         }
     }
 
+    @action editUser = () => {
+        console.log('this.searchingUser: ', this.searchingUser);
+    }
+
     @action addUser = (user) => {
         const usersList = this.getUsersList()
         const { phone } = user
         usersList[`${phone}`] = user
         localStorage.setItem('users', JSON.stringify(usersList))
 
+    }
+
+    @action deleteUser = ( phone ) => {
+        const users = this.getUsersList()
+        delete users[phone]
+        localStorage.setItem('users', JSON.stringify(users))
     }
 
     getUsersList = () => {
@@ -122,8 +149,24 @@ class UserStore{
     }
 
     phoneValidate = (phone) => {
-        const res = phone.str.replace(/[^+\d]/g, '')
-        return res.length === 12
+        const res = phone.replace(/[^+\d]/g, '')
+        console.log('res: ', res);
+        return res.length === 12 && (parseInt(res) >= 0 || parseInt(res) <= 0)
+    }
+
+    editPhone = (phone) => {
+        if(phone.cahrAt(0)==='+' && phone.cahrAt(1)==='7') return phone
+        else return `+7${this.phone.substring(1)}`
+    }
+
+    isEmailExist = (email) => {
+        const users = this.getUsersList()
+        return Object.keys(users).filter(el => users[`${el}`][`email`] === email).length
+    }
+
+    isPhoneExist = (phone) => {
+        const users = this.getUsersList()
+        return Object.keys(users).filter(el => users[`${el}`][`phone`] === phone).length
     }
 
     findByPhone = (phone) => {
@@ -136,9 +179,7 @@ class UserStore{
         if(email === null || email === undefined) return null
         const editedEmail = email.toLowerCase().trim()
         const usersList = this.getUsersList()
-        const searchingUser = Object.keys(usersList).filter(el => {
-            return usersList[`${el}`][`email`] === editedEmail
-        })
+        const searchingUser = Object.keys(usersList).filter(el => usersList[`${el}`][`email`] === editedEmail)
         this.searchingUser = usersList[`${searchingUser[0]}`]
     }
 

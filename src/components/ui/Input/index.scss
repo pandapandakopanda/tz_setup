@@ -12,7 +12,7 @@
   
   .input_title{
     display: flex;
-    min-width: 100px;
+    width: 100px;
     user-select: none;
     margin: 0;
   }
@@ -22,7 +22,6 @@
     flex: 1;
     justify-self: flex-end;
     height: 20px;
-    width: 200px;
     background-color: white;
     font-size: 10px;
     padding-left: 15px;
@@ -33,4 +32,18 @@
 
   .input_search {
     justify-content: flex-start;
+  }
+
+  @media screen and (max-width: 990px){
+    .input {
+      flex-direction: column;
+      min-height: 40px;
+    }
+    .input_title{
+      min-width: 20%;
+    }
+    .input_header{
+      width: 100%;
+      padding-left: 0;
+    }
   }

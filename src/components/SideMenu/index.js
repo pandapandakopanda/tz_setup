@@ -11,6 +11,7 @@ class SideMenu extends React.Component {
   onClickHandler = () => {
     this.props.store.userStore.isSearching = false
     this.props.store.userStore.isFiltering = false
+    this.props.store.userStore.isEditing = false
   }
 
   render(){

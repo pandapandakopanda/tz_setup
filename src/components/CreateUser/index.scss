@@ -3,13 +3,15 @@
     height: 100vh;
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    align-items: center
 }
 
 .newuser {
     display: flex;
     flex-direction: column;
-    width: 40%;
-    height: 300px;
+    width: 50%;
+    height: 400px;
     margin: 10px 0 0 10px;
     padding-left: 20px;
     padding-right: 20px;
@@ -20,4 +22,13 @@
 
 .newuser_bottom {
     display: flex;
+}
+
+@media screen and (max-width: 680px) {
+    .newuser_bottom {
+        flex-direction: column;
+    }
+    .newuser {
+        padding: 0;
+    }
 }

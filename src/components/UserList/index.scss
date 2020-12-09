@@ -1,17 +1,27 @@
+.wrapper {
+    display: flex;
+    width: 100%;
+    align-items: flex-start;
+    justify-content: center;
+    padding-top: 40px;
+}
+
+
 .users {
     display: flex;
     flex-direction: column;
-    padding-left: 20px;
     font-size: 10px;
 }
 
 .user {
     display: flex;
-    padding-right: 20px;
+    flex-direction: column;
     padding-left: 10px;
     min-height: 40px;
     font-size: 10px;
-    align-items: center;
+    align-items: flex-end;
+    justify-content: space-between;
+    margin-top: 10px;
     background: white;
     cursor: pointer;
     transition: background .5s;
@@ -19,6 +29,11 @@
         background: black;
         color: white;
     }
+}
+
+.data{
+    width: 100%;
+    display: flex;
 }
 
 .userName {
@@ -40,6 +55,7 @@
 .filter {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     p{
         display: flex;
         justify-content: center;
@@ -52,4 +68,8 @@
     display: flex;
     flex-direction: row;
     align-items: center;
+}
+
+.button_block {
+    display: flex;
 }
