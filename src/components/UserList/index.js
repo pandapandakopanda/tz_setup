@@ -47,6 +47,7 @@ class UserList extends React.Component {
             }
             const deleteUser = () =>{
                 this.props.store.userStore.deleteUser(phone)
+                console.log(this.state);
                 this.setState({update:true})
             }
 
