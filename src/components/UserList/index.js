@@ -39,7 +39,7 @@ class UserList extends React.Component {
     createList = (users) => {
         if(users === null) return null
         const list = Object.keys(users).map(el => {
-            const {name, lastname, surname, phone, email, status,changedate, regdate} =  users[`${el}`]
+            const {name, lastname, surname, phone, email, status,changedate, regdate} =  users[el]
             const editUser = () => {
                 this.props.store.userStore.isEditing = true
                 this.props.store.userStore.setCurrentUserData(phone)
@@ -72,62 +72,59 @@ class UserList extends React.Component {
     }
 
     showFoundUser = (user) =>{
-        console.log('user: ', user);
         if(user === undefined || user === null) return (
             <Error error={'Пользователь не найден'} />
             )
             else{
             const userObj = new Object
-            userObj[`${user.phone}`]=user
+            userObj[user.phone]=user
             return this.createList(userObj)
         }
     }
 
     showFilteredUsers = (users) => {
         const list = this.createList(users)
-        console.log('list: ', list);
         return list
     }
 
     render(){
 
         const users = this.props.store.userStore.getUsersList()
-        const {searchingUser,isFiltering , filteredUsers, isSearching, filterStatus, roles} = this.props.store.userStore
+        const {searchingUser, isFiltering , filteredUsers, isSearching, filterStatus, roles} = this.props.store.userStore
         
         const view = (searchingUser, filteredUsers, users) => {
             if(isSearching) return this.showFoundUser(searchingUser)
             else if (isFiltering) return this.showFilteredUsers(filteredUsers)
             else return this.createList(users)
         }
-
         return(
             <div className={ST.wrapper}>
-            <div className={ST.users}>
-                <div className={ST.filter}>
-                    <p> Отсортировать список пользователей по статусу: </p>
-                    <Select 
-                        selected={filterStatus}
-                        items={roles} 
-                        placeholder={'Выберите роль'}
-                        onSelect = {this.props.store.userStore.setFilterStatus}
-                    />
-                    <Button mody={{search:true}} title={'сортировать'} onClickHandler={this.sortById}/>
+                <div className={ST.users}>
+                    <div className={ST.filter}>
+                        <p> Отсортировать список пользователей по статусу: </p>
+                        <Select 
+                            selected={filterStatus}
+                            items={roles} 
+                            placeholder={'Выберите роль'}
+                            onSelect = {this.props.store.userStore.setFilterStatus}
+                        />
+                        <Button mody={{search:true}} title={'сортировать'} onClickHandler={this.sortById}/>
+                    </div>
+                    <div className={ST.search}>
+                        <Search placeholder={'Search'} onChangeHandler={this.props.store.userStore.setSearch}/>
+                        <Button mody={{search:true}} title={'найти по номеру'} onClickHandler={this.findByPhone}/>
+                        <Button mody={{search:true}} title={'найти по почте'} onClickHandler={this.findByEmail}/>
+                    </div>
+                    <div className={ST.discript}>
+                        <div className={ST.userName}>Фамилия Имя Отчество</div>
+                        <div className={ST.email}>Почта</div>
+                        <div className={ST.phone}>Телефон</div>
+                        <div className={ST.regdate}>Дата создания</div>
+                        <div className={ST.changedate}>Дата изменения</div>
+                        <div className={ST.status}>Статус</div>
+                    </div>
+                    {view(searchingUser, filteredUsers, users)}
                 </div>
-                <div className={ST.search}>
-                    <Search placeholder={'Search'} onChangeHandler={this.props.store.userStore.setSearch}/>
-                    <Button mody={{search:true}} title={'найти по номеру'} onClickHandler={this.findByPhone}/>
-                    <Button mody={{search:true}} title={'найти по почте'} onClickHandler={this.findByEmail}/>
-                </div>
-                <div className={ST.discript}>
-                    <div className={ST.userName}>Фамилия Имя Отчество</div>
-                    <div className={ST.email}>Почта</div>
-                    <div className={ST.phone}>Телефон</div>
-                    <div className={ST.regdate}>Дата создания</div>
-                    <div className={ST.changedate}>Дата изменения</div>
-                    <div className={ST.status}>Статус</div>
-                </div>
-                {view(searchingUser, filteredUsers, users)}
-            </div>
             </div>
         )
     }
