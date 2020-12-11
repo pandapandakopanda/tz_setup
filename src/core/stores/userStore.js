@@ -2,11 +2,11 @@ import {observable, action} from 'mobx'
 
 class UserStore{
   
-    @observable name =  null
-    @observable surname = null
-    @observable lastname = null
-    @observable email = null
-    @observable phone = null
+    @observable name =  ''
+    @observable surname = ''
+    @observable lastname = ''
+    @observable email = ''
+    @observable phone = ''
     @observable status = null
     @observable filterStatus = null
     @observable changedate = null
@@ -80,7 +80,6 @@ class UserStore{
 
     @action createUser = () => {
         const {name, surname, lastname, email } = this
-        console.log('this.phone: ', this.phone);
         const phone = (this.editPhone(this.phone) === null) ? null : this.editPhone(this.phone)
         const date = new Date()
         const regdate = new Intl.DateTimeFormat().format(date)
@@ -115,14 +114,14 @@ class UserStore{
         if(!this.emailValidate(email)) {
             this.error = 'Пожалуйста, введите корректный e-mail'
             return
-        } else if (this.isEmailExist(email) && email === this.searchingUser.email) {
+        } else if (this.isEmailExist(email) && !email === this.searchingUser.email) {
             this.error = `'Такой e-mail уже используется'`
             return
         }
         if(!this.phoneValidate(phone)) {
             this.error = 'Пожалуйста, введите корректный номер телефона'
             return
-        } else if (this.isPhoneExist(phone) && phone === this.searchingUser.phone) {
+        } else if (this.isPhoneExist(phone) && !phone === this.searchingUser.phone) {
             this.error = `'Такой телефон уже используется'`
             return
         }
@@ -135,17 +134,10 @@ class UserStore{
     @action editUser = () => {
         const prevPhone = this.searchingUser.phone
         const phone = this.editPhone(this.phone)
-        const usersList = this.getUsersList()
-        let newUser = {}
         if (phone === prevPhone){
-            usersList[phone] = this.editedUser()
-            this.setItemToLS(usersList)
+            this.addUser(this.editedUser())
         } else {
-            console.log('prevPhone: ', prevPhone);
-            console.log('phone: ', phone);
-            usersList[phone] = this.editedUser()
-            console.log('newUser: ', newUser);
-            this.setItemToLS(usersList)
+            this.addUser(this.editedUser())
             this.deleteUser(prevPhone)
         }
     }
@@ -157,7 +149,7 @@ class UserStore{
             usersList[phone] = user
             this.setItemToLS(usersList)
             this.error = ''
-            this.clear()
+            this.reload()
         } else {
             this.error = 'Пожалуйста, заполните все поля'
             return
@@ -231,15 +223,14 @@ class UserStore{
         this.searchingUser = usersList[searchingUser[0]]
     }
 
-    @action clear = () => {
-        console.log('clearing');
-        this.name=null
-        this.surname=null
-        this.lastname=null
-        this.email = null
-        this.phone = null
-        this.regdate = null
-        this.searchingUser = null
+    @action reload = () => {
+        this.name = ''
+        this.surname = ''
+        this.lastname = ''
+        this.email = ''
+        this.phone = ''
+        this.regdate = ''
+        this.searchingUser = ''
     }
 
 }

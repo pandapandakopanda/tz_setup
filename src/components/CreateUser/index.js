@@ -11,10 +11,13 @@ import { inject, observer } from 'mobx-react'
 @observer
 class CreateUser extends React.Component {
 
+    state = {
+        update:true
+    }
+
     isEditing = this.props.store.userStore.isEditing
 
     componentDidMount(){
-        this.isEditing = this.props.store.userStore.error = ''
         this.isEditing = this.props.store.userStore.isEditing
         console.log('this.isEditing: ', this.isEditing)
     }
@@ -30,14 +33,14 @@ class CreateUser extends React.Component {
 
         const createUser = () => {
             const newUser = this.props.store.userStore.createUser()
-                this.props.store.userStore.addUser(newUser)
-                this.props.store.userStore.clear()
+            this.props.store.userStore.addUser(newUser)
+            this.setState({update:!this.state.update})
         }
 
             
         const onClick = () => {
-            console.log('isEditing: ', this.isEditing);
             this.isEditing ? editUser() : createUser() 
+            console.log('this.isEditing: ', this.isEditing);
         }
 
 
@@ -49,31 +52,31 @@ class CreateUser extends React.Component {
                         title={'Фамилия'} 
                         placeholder={'Введите фамилию'} 
                         onChangeHandler={setSurname} 
-                        defaultValue = {surname}
+                        value = {surname}
                     />
                     <Input 
                         title={'Имя'} 
                         placeholder={'Введите имя'} 
                         onChangeHandler={setName} 
-                        defaultValue = {name}
+                        value = {name}
                     />
                     <Input 
                         title={'Отчество'} 
                         placeholder={'Введите отчество'} 
                         onChangeHandler={setLastname} 
-                        defaultValue = {lastname}
+                        value = {lastname}
                     />
                     <Input 
                         title={'E-mail'} 
                         placeholder={'Введите e-mail'} 
                         onChangeHandler={setEmail} 
-                        defaultValue = {email}
+                        value = {email}
                     />
                     <Input 
                         title={'Телефон'} 
                         placeholder={'Введите телефон'} 
                         onChangeHandler={setPhone} 
-                        defaultValue = {phone}
+                        value = {phone}
                     />
                     <div className={ST.newuser_bottom}>
                         <Select 
@@ -82,7 +85,7 @@ class CreateUser extends React.Component {
                             placeholder={'Выберите роль'}
                             onSelect = {setStatus}
                         />
-                        <Button mody={{submit: true}} title={'Отправить'} onClickHandler={onClick} />
+                            <Button mody={{submit: true}} title={'Отправить'} onClickHandler={onClick} />
                     </div>
                 </div>
                 <Error error={error} />

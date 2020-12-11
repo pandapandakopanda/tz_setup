@@ -9,7 +9,7 @@ import {inject, observer} from 'mobx-react'
 class SideMenu extends React.Component {
 
   onClick = () => {
-    this.props.store.userStore.clear()
+    this.props.store.userStore.reload()
     this.props.store.userStore.isSearching = false
     this.props.store.userStore.isFiltering = false
     this.props.store.userStore.isEditing = false

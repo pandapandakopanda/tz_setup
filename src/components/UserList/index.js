@@ -38,16 +38,14 @@ class UserList extends React.Component {
     
     createList = (users) => {
         if(users === null) return null
-        console.log('users: ', users);
         const list = Object.keys(users).map(el => {
-            const {name, lastname, surname, phone, email, status, regdate} =  users[`${el}`]
+            const {name, lastname, surname, phone, email, status,changedate, regdate} =  users[`${el}`]
             const editUser = () => {
                 this.props.store.userStore.isEditing = true
                 this.props.store.userStore.setCurrentUserData(phone)
             }
             const deleteUser = () =>{
                 this.props.store.userStore.deleteUser(phone)
-                console.log(this.state);
                 this.setState({update:true})
             }
 
@@ -58,6 +56,7 @@ class UserList extends React.Component {
                         <div className={ST.email}>{email}</div>
                         <div className={ST.phone}>{phone}</div>
                         <div className={ST.regdate}>{regdate}</div>
+                        <div className={ST.changedate}>{(changedate)? changedate : 'не изменен'}</div>
                         <div className={ST.status}>{status}</div>
                     </div>
                     <div className={ST.button_block}>
@@ -118,6 +117,14 @@ class UserList extends React.Component {
                     <Search placeholder={'Search'} onChangeHandler={this.props.store.userStore.setSearch}/>
                     <Button mody={{search:true}} title={'найти по номеру'} onClickHandler={this.findByPhone}/>
                     <Button mody={{search:true}} title={'найти по почте'} onClickHandler={this.findByEmail}/>
+                </div>
+                <div className={ST.discript}>
+                    <div className={ST.userName}>Фамилия Имя Отчество</div>
+                    <div className={ST.email}>Почта</div>
+                    <div className={ST.phone}>Телефон</div>
+                    <div className={ST.regdate}>Дата создания</div>
+                    <div className={ST.changedate}>Дата изменения</div>
+                    <div className={ST.status}>Статус</div>
                 </div>
                 {view(searchingUser, filteredUsers, users)}
             </div>

@@ -10,7 +10,7 @@ class Input extends React.Component {
   }
 
   render(){
-    const {title, placeholder, defaultValue} = this.props
+    const {title, placeholder, value} = this.props
     return(
       <div className={ST.input}>
         <p className={ST.input_title}>{title}</p>
@@ -18,7 +18,7 @@ class Input extends React.Component {
           className={ST.input_header} 
           onChange={this.onChange} 
           placeholder={placeholder}
-          defaultValue={defaultValue}
+          value={value}
         />
       </div>
     )
