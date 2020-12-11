@@ -13,3 +13,15 @@
     justify-content: space-between;
     padding-right: 2px;
 }
+
+@media screen and (max-width: 415px) {
+    .sideMenu{
+        max-width: 100%;
+        border: none;
+        height: 100%;
+    }
+    .sideMenu_battonblock{
+        padding: 0;
+        width: 100%;
+    }
+}

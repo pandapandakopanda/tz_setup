@@ -43,7 +43,7 @@ class UserList extends React.Component {
             const {name, lastname, surname, phone, email, status, regdate} =  users[`${el}`]
             const editUser = () => {
                 this.props.store.userStore.isEditing = true
-                this.props.store.userStore.setCurrentUser(phone)
+                this.props.store.userStore.setCurrentUserData(phone)
             }
             const deleteUser = () =>{
                 this.props.store.userStore.deleteUser(phone)

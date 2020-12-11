@@ -8,7 +8,8 @@ import {inject, observer} from 'mobx-react'
 @observer
 class SideMenu extends React.Component {
 
-  onClickHandler = () => {
+  onClick = () => {
+    this.props.store.userStore.clear()
     this.props.store.userStore.isSearching = false
     this.props.store.userStore.isFiltering = false
     this.props.store.userStore.isEditing = false
@@ -18,8 +19,18 @@ class SideMenu extends React.Component {
     return(
       <div className={ST.sideMenu}>
         <div className={ST.sideMenu_battonblock}>
-          <Link to='/userlist'><Button title='Список пользователей' onClickHandler={this.onClickHandler} /></Link>
-          <Link to='/newuser'><Button title='Добавить нового пользователя'/></Link>
+          <Link to='/userlist'>
+            <Button 
+              title='Список пользователей' 
+              onClickHandler={this.onClick} 
+            />
+            </Link>
+          <Link to='/newuser'>
+            <Button 
+            title='Добавить нового пользователя'
+            onClickHandler={this.onClick}
+            />
+          </Link>
         </div>
       </div>
     )

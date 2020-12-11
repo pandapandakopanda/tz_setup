@@ -24,10 +24,14 @@
     margin-top: 10px;
     background: white;
     cursor: pointer;
-    transition: background .5s;
+    transition: background .3s;
     &:hover {
         background: black;
         color: white;
+        .button_block a{ 
+                    background:black;
+                    color: white
+        }
     }
 }
 
@@ -72,4 +76,52 @@
 
 .button_block {
     display: flex;
+    a {
+        transition: background .3s;
+    }
+}
+
+@media screen and (max-width: 810px) {
+    .filter {
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start;
+    }
+    .search {
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start;
+        height: 100%;
+    }
+    .wrapper {
+        padding: 5px;
+        justify-content: flex-start;
+    }
+    .users {
+        max-width: 100%;
+    }
+    .user {
+        max-width: 100%;
+        border: 1px solid black;
+        padding: 0;
+        box-sizing: border-box;
+    }
+    .data {
+        flex-direction: column;
+        width: 100%;
+    }
+    .userName, .email, .phone, .regdate, .status {
+        height: 50px;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        max-width: 100%;
+        overflow:hidden;
+        text-overflow: ellipsis
+    }
+
+    .button_block {
+        flex-direction: column;
+        width: 100%;
+    }
 }

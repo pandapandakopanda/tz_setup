@@ -57,3 +57,20 @@
       background: #000000;
     }
   }
+
+  @media screen and (max-width: 670px) {
+    .select {
+      max-width: 100%;
+      height: 100%;
+      margin: 0;
+      padding: 0;
+    }
+
+    .select_wrapper{
+      max-width: 100%;
+    }
+
+    .select_header {
+      max-width: 100%;
+    }
+}
